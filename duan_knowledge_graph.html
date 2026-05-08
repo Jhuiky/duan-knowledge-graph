@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>「短」形容词义项知识图谱</title>
+<script src="./d3.min.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body {
+  width:100%; height:100%;
+  background:#0d1117;
+  font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+  color:#e6edf3;
+  overflow:hidden;
+}
+#header {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:linear-gradient(135deg,#161b22,#1c2333);
+  border-bottom:1px solid #30363d;
+  padding:12px 24px;
+  display:flex; align-items:center; gap:16px;
+}
+#header h1 {
+  font-size:20px; font-weight:800;
+  background:linear-gradient(90deg,#79c0ff,#d2a8ff);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  letter-spacing:2px;
+}
+#header p { font-size:12px; color:#8b949e; border-left:1px solid #30363d; padding-left:14px; }
+
+/* 图例 */
+#legend {
+  position:fixed; top:68px; left:16px; z-index:90;
+  background:rgba(22,27,34,0.93); border:1px solid #30363d;
+  border-radius:10px; padding:14px 16px; min-width:200px;
+  backdrop-filter:blur(8px);
+}
+#legend h3 { font-size:11px; color:#6e7681; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; }
+.lg-row { display:flex; align-items:center; gap:8px; font-size:12px; margin-bottom:6px; }
+.lg-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; }
+.lg-sep { border-top:1px solid #30363d; margin:8px 0; }
+.lg-line { display:flex; align-items:center; gap:8px; font-size:11px; color:#8b949e; margin-bottom:5px; }
+.lg-dash { width:24px; height:2px; border-radius:1px; flex-shrink:0; }
+
+/* 详情卡片 */
+#detail {
+  position:fixed; top:68px; right:16px; z-index:90;
+  background:rgba(22,27,34,0.96); border:1px solid #30363d;
+  border-radius:10px; padding:18px; width:290px;
+  backdrop-filter:blur(10px);
+  opacity:0; transform:translateX(16px);
+  transition:opacity .25s,transform .25s;
+  pointer-events:none;
+}
+#detail.show { opacity:1; transform:translateX(0); pointer-events:all; }
+#detail .d-tag {
+  display:inline-block; font-size:10px; font-weight:700;
+  padding:2px 8px; border-radius:4px; margin-bottom:8px; letter-spacing:1px;
+}
+#detail .d-zh  { font-size:28px; font-weight:800; line-height:1.1; margin-bottom:3px; }
+#detail .d-py  { font-size:13px; color:#8b949e; font-style:italic; margin-bottom:8px; }
+#detail .d-def { font-size:12px; line-height:1.8; color:#c9d1d9; margin-bottom:10px; }
+#detail .d-ex  { background:rgba(255,255,255,.03); border-left:3px solid #30363d; padding:7px 10px; border-radius:4px; margin-bottom:8px; }
+#detail .d-ex-t{ font-size:10px; color:#6e7681; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+#detail .d-ex-i{ font-size:12px; color:#b0bac4; line-height:1.9; }
+#detail .d-mech{ font-size:11px; padding:3px 9px; border-radius:4px; display:inline-block; }
+#detail .d-rels { margin-top:8px; font-size:11px; color:#6e7681; }
+.rel-b { display:inline-block; font-size:10px; padding:2px 6px; border-radius:8px; margin:2px 2px 0 0; background:rgba(255,255,255,.06); border:1px solid #30363d; color:#8b949e; }
+
+/* tooltip */
+#tip {
+  position:fixed; z-index:200; background:rgba(22,27,34,.97);
+  border:1px solid #444c56; border-radius:7px; padding:8px 12px;
+  font-size:12px; pointer-events:none; opacity:0; transition:opacity .12s;
+  max-width:200px; line-height:1.7;
+}
+
+/* controls */
+#ctrl {
+  position:fixed; bottom:52px; left:50%; transform:translateX(-50%);
+  display:flex; gap:8px; z-index:90;
+}
+.btn {
+  background:rgba(22,27,34,.92); border:1px solid #30363d; color:#c9d1d9;
+  border-radius:7px; padding:7px 14px; font-size:12px; cursor:pointer;
+  transition:all .18s; backdrop-filter:blur(6px);
+}
+.btn:hover { border-color:#58a6ff; color:#58a6ff; }
+
+/* 底栏 */
+#footer {
+  position:fixed; bottom:0; left:0; right:0;
+  background:rgba(13,17,23,.88); border-top:1px solid #21262d;
+  padding:6px 24px; display:flex; gap:20px; align-items:center;
+  font-size:11px; color:#6e7681; z-index:80; flex-wrap:wrap;
+}
+.nb { display:inline-block; font-size:10px; padding:2px 6px; border-radius:3px; font-weight:700; margin-right:3px; }
+
+svg#g { display:block; width:100vw; height:100vh; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <h1>「短」形容词义项知识图谱</h1>
+  <p>国际中文教育 · 认知语义学视角 · 义项引申关系可视化</p>
+</div>
+
+<div id="legend">
+  <h3>节点类型</h3>
+  <div class="lg-row"><div class="lg-dot" style="background:#f97316"></div>核心义（本义）</div>
+  <div class="lg-row"><div class="lg-dot" style="background:#3b82f6"></div>空间维度义</div>
+  <div class="lg-row"><div class="lg-dot" style="background:#8b5cf6"></div>时间维度义</div>
+  <div class="lg-row"><div class="lg-dot" style="background:#10b981"></div>能力/程度义</div>
+  <div class="lg-row"><div class="lg-dot" style="background:#ec4899"></div>价值/道德义</div>
+  <div class="lg-row"><div class="lg-dot" style="background:#eab308"></div>数量/亏缺义</div>
+  <div class="lg-row"><div class="lg-dot" style="background:#64748b"></div>语境衍生义</div>
+  <div class="lg-sep"></div>
+  <h3>引申关系</h3>
+  <div class="lg-line"><div class="lg-dash" style="background:#f97316"></div>空间本义延伸</div>
+  <div class="lg-line"><div class="lg-dash" style="background:#a855f7"></div>概念隐喻（时间←空间）</div>
+  <div class="lg-line"><div class="lg-dash" style="background:#06b6d4"></div>转喻引申</div>
+  <div class="lg-line"><div class="lg-dash" style="background:#10b981"></div>隐喻引申（能力/程度）</div>
+  <div class="lg-line"><div class="lg-dash" style="background:#ec4899"></div>价值隐喻引申</div>
+  <div class="lg-line"><div class="lg-dash" style="background:#eab308;height:0;border-top:2px dashed #eab308"></div>链式/间接引申</div>
+</div>
+
+<div id="detail">
+  <div id="detailContent"></div>
+</div>
+<div id="tip"></div>
+
+<svg id="g"></svg>
+
+<div id="ctrl">
+  <button class="btn" onclick="resetView()">⟳ 重置视图</button>
+  <button class="btn" onclick="toggleSim()">⏸ 暂停/继续</button>
+  <button class="btn" onclick="document.getElementById('detail').classList.remove('show')">✕ 关闭详情</button>
+</div>
+
+<div id="footer">
+  <span><span class="nb" style="background:#f9731622;color:#f97316">本义</span>空间距离小</span>
+  <span><span class="nb" style="background:#a855f722;color:#a855f7">隐喻</span>空间→时间映射</span>
+  <span><span class="nb" style="background:#06b6d422;color:#06b6d4">转喻</span>长度量→数量/特征</span>
+  <span><span class="nb" style="background:#10b98122;color:#10b981">引申</span>距离不足→能力不足</span>
+  <span><span class="nb" style="background:#ec489922;color:#ec4899">价值</span>空间矮短→道德低劣</span>
+  <span style="margin-left:auto">点击节点查看详情 · 拖拽移动 · 滚轮缩放</span>
+</div>
+
+<script>
+// ══ 颜色表 ══
+const C = {
+  core:"#f97316", spatial:"#3b82f6", temporal:"#8b5cf6",
+  ability:"#10b981", moral:"#ec4899", quantity:"#eab308", context:"#64748b"
+};
+const LC = {
+  spatial_meta:"#f97316", temporal_meta:"#a855f7", metonymy:"#06b6d4",
+  ability_meta:"#10b981", moral_meta:"#ec4899", chain:"#eab308"
+};
+
+// ══ 节点 ══
+const nodes = [
+  { id:"core", label:"短", sub:"核心/本义", type:"core", r:44,
+    pinyin:"duǎn",
+    def:"两端之间距离小、不够长。本义源于人类对物理空间线段/距离的具身感知，是所有引申义的原型义。",
+    examples:["这根绳子太短了","短途旅行","短路"],
+    mechanism:"原型义 / 空间本义", mechColor:"#f97316" },
+
+  { id:"sp1", label:"尺寸短小", sub:"空间维度①", type:"spatial", r:32,
+    pinyin:"chǐcùn duǎnxiǎo",
+    def:"物体在某一维度上尺寸较小，与「长」相对。侧重实体的物理维度测量。",
+    examples:["短袖衬衫","短发","短裤","手脚短小"],
+    mechanism:"空间本义延伸", mechColor:"#3b82f6" },
+
+  { id:"sp2", label:"距离近", sub:"空间维度②", type:"spatial", r:27,
+    pinyin:"jùlí jìn",
+    def:"路程或距离短，不需走远。",
+    examples:["短途汽车","短程导弹","短距离冲刺"],
+    mechanism:"空间本义延伸", mechColor:"#3b82f6" },
+
+  { id:"t1", label:"时间短暂", sub:"时间维度①", type:"temporal", r:33,
+    pinyin:"shíjiān duǎnzàn",
+    def:"时间持续少、不长。「距离短」→「时间短」，是经典 TIME IS SPACE 概念隐喻。",
+    examples:["短暂的童年","短期培训","短时记忆","短片"],
+    mechanism:"概念隐喻：时间←空间", mechColor:"#8b5cf6" },
+
+  { id:"t2", label:"资历浅近", sub:"时间维度②", type:"temporal", r:25,
+    pinyin:"zīlì qiǎnjìn",
+    def:"经历、资历时间不长，阅历不深。由时间短派生而来。",
+    examples:["资历尚短","入行时间短","他学汉语的时间很短"],
+    mechanism:"时间义链式引申", mechColor:"#8b5cf6" },
+
+  { id:"ab1", label:"能力不足", sub:"能力义①", type:"ability", r:32,
+    pinyin:"nénglì bùzú",
+    def:"能力或水平欠缺。「距离够不到标准」→「能力达不到要求」，空间距离隐喻能力高低。",
+    examples:["短板效应","取长补短","一技之短","扬长避短"],
+    mechanism:"隐喻引申：能力←距离", mechColor:"#10b981" },
+
+  { id:"ab2", label:"见识浅薄", sub:"能力义②", type:"ability", r:26,
+    pinyin:"jiànshi qiǎnbó",
+    def:"见识、眼光不深远，认识范围有限。由「能力不足」进一步抽象。",
+    examples:["鼠目寸光","目光短浅","心胸短窄","见识短浅"],
+    mechanism:"链式引申：认知←能力←空间", mechColor:"#10b981" },
+
+  { id:"ab3", label:"篇幅简短", sub:"能力/语篇义③", type:"ability", r:26,
+    pinyin:"piānfú jiǎnduǎn",
+    def:"言语表达内容量少、篇幅简略。以「物理长度短」转喻「文字篇幅少」。",
+    examples:["简短的发言","短信","短评","短文","短篇小说"],
+    mechanism:"转喻：篇幅量←物理长度", mechColor:"#06b6d4" },
+
+  { id:"mo1", label:"品格低劣", sub:"道德义①", type:"moral", r:27,
+    pinyin:"pǐngé dīliè",
+    def:"品性、操守不高，含贬义。空间上的「矮/短」映射到道德评价的「低劣」。",
+    examples:["短见薄识","护短（袒护缺点）","揭短","一短难掩"],
+    mechanism:"价值隐喻：道德←高度/长度", mechColor:"#ec4899" },
+
+  { id:"mo2", label:"弱点缺陷", sub:"道德义②", type:"moral", r:27,
+    pinyin:"ruòdiǎn quēxiàn",
+    def:"某项素质或特征不足形成的缺陷。由「数量不足」转喻至「素质缺失」。",
+    examples:["揭人短处","护短","人无完人各有所短","取长补短"],
+    mechanism:"转喻：缺陷←不足量", mechColor:"#06b6d4" },
+
+  { id:"q1", label:"数量亏缺", sub:"数量义①", type:"quantity", r:30,
+    pinyin:"shùliàng kuīquē",
+    def:"数量不够、欠缺。「长度不足」转喻为「数量不满额」，是由空间量到数量量的转喻。",
+    examples:["短秤","短款","短斤少两","物资短缺"],
+    mechanism:"转喻引申：数量←长度量", mechColor:"#06b6d4" },
+
+  { id:"q2", label:"资金缺乏/做空", sub:"数量义②", type:"quantity", r:25,
+    pinyin:"zījīn quēfá / zuòkōng",
+    def:"金融语境中资金头寸不足；「做空/Short」指卖出未持有资产，预期价跌后买回获利。",
+    examples:["账户短款","做空股票","短仓","资金短缺"],
+    mechanism:"链式：金融量←数量←长度", mechColor:"#eab308" },
+
+  { id:"ctx1", label:"短路", sub:"语境衍生①", type:"context", r:20,
+    pinyin:"duǎnlù",
+    def:"电路中导线直连使回路过短，引发故障。后比喻「思维断路/逻辑混乱」。",
+    examples:["电线短路","他今天脑子短路了"],
+    mechanism:"转喻→隐喻链", mechColor:"#64748b" },
+
+  { id:"ctx2", label:"短命", sub:"语境衍生②", type:"context", r:20,
+    pinyin:"duǎnmìng",
+    def:"寿命短暂。「时间短」+「生命」合成，也比喻事物存续时间极短。",
+    examples:["短命的政权","这款产品很短命"],
+    mechanism:"时间隐喻具体化", mechColor:"#8b5cf6" },
+
+  { id:"ctx3", label:"做空/Short", sub:"语境衍生③", type:"context", r:20,
+    pinyin:"zuòkōng / Short",
+    def:"金融英文 Short（短仓）借入量化概念，汉语「做空」与空间「空/短」呼应。",
+    examples:["做空股票","持有空头仓位"],
+    mechanism:"跨语言概念映射", mechColor:"#64748b" }
+];
+
+// ══ 边 ══
+const links = [
+  { source:"core", target:"sp1",  label:"空间本义延伸",        type:"spatial_meta" },
+  { source:"core", target:"sp2",  label:"空间本义延伸",        type:"spatial_meta" },
+  { source:"core", target:"t1",   label:"概念隐喻\n时间←空间", type:"temporal_meta" },
+  { source:"t1",   target:"t2",   label:"链式引申",            type:"chain" },
+  { source:"core", target:"ab1",  label:"隐喻引申\n能力←距离", type:"ability_meta" },
+  { source:"ab1",  target:"ab2",  label:"链式引申",            type:"chain" },
+  { source:"ab1",  target:"ab3",  label:"转喻引申",            type:"metonymy" },
+  { source:"ab1",  target:"mo1",  label:"价值隐喻",            type:"moral_meta" },
+  { source:"core", target:"q1",   label:"转喻\n量←长度",       type:"metonymy" },
+  { source:"q1",   target:"mo2",  label:"转喻引申",            type:"metonymy" },
+  { source:"q1",   target:"q2",   label:"链式引申",            type:"chain" },
+  { source:"sp2",  target:"ctx1", label:"转喻",                type:"metonymy" },
+  { source:"t1",   target:"ctx2", label:"具体化",              type:"temporal_meta" },
+  { source:"q2",   target:"ctx3", label:"跨语言映射",          type:"chain" },
+  { source:"t1",   target:"ab1",  label:"时间短→资历浅\n转喻", type:"metonymy" },
+  { source:"sp1",  target:"ab3",  label:"篇幅短\n转喻",        type:"metonymy" }
+];
+
+// ══ 初始化 D3 ══
+const W = window.innerWidth, H = window.innerHeight;
+
+const svg = d3.select("#g")
+  .attr("width", W).attr("height", H);
+
+// 定义箭头
+const defs = svg.append("defs");
+Object.entries(LC).forEach(([k, col]) => {
+  defs.append("marker")
+    .attr("id", "arr_" + k)
+    .attr("viewBox", "0 -5 10 10").attr("refX", 24).attr("refY", 0)
+    .attr("markerWidth", 6).attr("markerHeight", 6).attr("orient", "auto")
+    .append("path").attr("d", "M0,-5L10,0L0,5")
+    .attr("fill", col).attr("opacity", .85);
+});
+
+// 发光滤镜
+const fl = defs.append("filter").attr("id","glow");
+fl.append("feGaussianBlur").attr("stdDeviation","3").attr("result","cb");
+const fm = fl.append("feMerge");
+fm.append("feMergeNode").attr("in","cb");
+fm.append("feMergeNode").attr("in","SourceGraphic");
+
+const root = svg.append("g");
+
+const zoom = d3.zoom().scaleExtent([.25,3]).on("zoom", e => root.attr("transform", e.transform));
+svg.call(zoom);
+
+// ── 仿真 ──
+const sim = d3.forceSimulation(nodes)
+  .force("link", d3.forceLink(links).id(d=>d.id)
+    .distance(d=>({spatial_meta:140,temporal_meta:170,ability_meta:160,moral_meta:150,metonymy:130,chain:110}[d.type]||130))
+    .strength(.45))
+  .force("charge", d3.forceManyBody().strength(-550))
+  .force("center",  d3.forceCenter(W/2, H/2))
+  .force("collide", d3.forceCollide().radius(d=>d.r+28))
+  .force("x", d3.forceX(W/2).strength(.03))
+  .force("y", d3.forceY(H/2).strength(.03));
+
+// ── 绘边 ──
+const linkSel = root.append("g").selectAll("line").data(links).enter()
+  .append("line")
+  .attr("fill","none")
+  .attr("stroke", d=>LC[d.type])
+  .attr("stroke-width", d=>d.type==="chain"?1.6:2.6)
+  .attr("stroke-opacity", .72)
+  .attr("stroke-dasharray", d=>d.type==="chain"?"6,4":null)
+  .attr("stroke-linecap","round")
+  .attr("marker-end", d=>`url(#arr_${d.type})`);
+
+// ── 边标签（非chain） ──
+const llSel = root.append("g").selectAll("g").data(links.filter(d=>d.type!=="chain")).enter()
+  .append("g");
+llSel.append("rect").attr("rx",3).attr("ry",3)
+  .attr("fill","#161b22").attr("fill-opacity",.85).attr("stroke","none");
+const llText = llSel.append("text")
+  .attr("fill","#8b949e").attr("font-size","9px").attr("text-anchor","middle");
+llText.each(function(d){
+  const lines = d.label.split("\n");
+  lines.forEach((l,i)=>{
+    d3.select(this).append("tspan").attr("x",0).attr("dy", i===0?0:11).text(l);
+  });
+});
+
+// ── 节点 ──
+const nodeSel = root.append("g").selectAll("g.nd").data(nodes).enter()
+  .append("g").attr("class","nd")
+  .call(d3.drag()
+    .on("start",(e,d)=>{ if(!e.active)sim.alphaTarget(.3).restart(); d.fx=d.x; d.fy=d.y; })
+    .on("drag", (e,d)=>{ d.fx=e.x; d.fy=e.y; })
+    .on("end",  (e,d)=>{ if(!e.active)sim.alphaTarget(0); d.fx=null; d.fy=null; })
+  );
+
+// 光晕圈（核心）
+nodeSel.filter(d=>d.type==="core").append("circle")
+  .attr("r", d=>d.r+14).attr("fill","none")
+  .attr("stroke","#f97316").attr("stroke-width",1.5)
+  .attr("stroke-opacity",.3).attr("stroke-dasharray","4,3");
+
+// 主圆
+nodeSel.append("circle")
+  .attr("r", d=>d.r)
+  .attr("fill", d=>C[d.type])
+  .attr("fill-opacity", d=>d.type==="core"?.95:.72)
+  .attr("stroke", d=>C[d.type])
+  .attr("stroke-width",2).attr("stroke-opacity",.9)
+  .style("cursor","pointer")
+  .style("filter", d=>d.type==="core"?"url(#glow)":null)
+  .on("click", onNodeClick)
+  .on("mouseover", onHover)
+  .on("mousemove", onMove)
+  .on("mouseout",  onOut);
+
+// 中文标签
+nodeSel.append("text")
+  .attr("text-anchor","middle").attr("dominant-baseline","middle")
+  .attr("fill","#e6edf3").attr("pointer-events","none")
+  .attr("y", d=>d.type==="core"?-5:-3)
+  .style("font-size", d=>d.type==="core"?"18px":"12px")
+  .style("font-weight","700")
+  .text(d=>d.label);
+
+// 副标签
+nodeSel.append("text")
+  .attr("text-anchor","middle").attr("dominant-baseline","middle")
+  .attr("fill","#8b949e").attr("pointer-events","none")
+  .attr("font-size","9px")
+  .attr("y", d=>d.r-9)
+  .text(d=>d.sub);
+
+// ── tick ──
+sim.on("tick",()=>{
+  linkSel
+    .attr("x1",d=>d.source.x).attr("y1",d=>d.source.y)
+    .attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+
+  llSel.attr("transform",d=>{
+    const mx=(d.source.x+d.target.x)/2, my=(d.source.y+d.target.y)/2;
+    return `translate(${mx},${my})`;
+  });
+  // 调整背景矩形
+  llSel.each(function(){
+    const g=d3.select(this), t=g.select("text"), r=g.select("rect");
+    const bb=t.node().getBBox();
+    r.attr("x",bb.x-3).attr("y",bb.y-2).attr("width",bb.width+6).attr("height",bb.height+4);
+  });
+
+  nodeSel.attr("transform",d=>`translate(${d.x},${d.y})`);
+});
+
+// 初始3秒固定核心
+const coreN=nodes.find(n=>n.id==="core");
+coreN.fx=W/2; coreN.fy=H/2;
+setTimeout(()=>{ coreN.fx=null; coreN.fy=null; },2800);
+
+// ══ 事件 ══
+const tip=document.getElementById("tip");
+
+function onHover(e,d){
+  tip.innerHTML=`<strong>${d.label}</strong>（${d.pinyin}）<br/><span style="color:#8b949e;font-size:10px">${d.sub}</span>`;
+  tip.style.opacity="1";
+  d3.select(this).attr("stroke-width",4);
+}
+function onMove(e){
+  tip.style.left=(e.clientX+12)+"px"; tip.style.top=(e.clientY-8)+"px";
+}
+function onOut(e,d){
+  tip.style.opacity="0";
+  d3.select(this).attr("stroke-width",2);
+}
+
+function onNodeClick(e,d){
+  e.stopPropagation();
+  const panel=document.getElementById("detail");
+  const content=document.getElementById("detailContent");
+
+  const related=links.filter(l=>{
+    const sid=typeof l.source==="object"?l.source.id:l.source;
+    const tid=typeof l.target==="object"?l.target.id:l.target;
+    return sid===d.id||tid===d.id;
+  });
+  const relBadges=related.map(l=>{
+    const sid=typeof l.source==="object"?l.source.id:l.source;
+    const tid=typeof l.target==="object"?l.target.id:l.target;
+    const otherId=sid===d.id?tid:sid;
+    const other=nodes.find(n=>n.id===otherId);
+    const lbl=l.label.replace("\n"," ");
+    return `<span class="rel-b">${lbl} → ${other?other.label:otherId}</span>`;
+  }).join("");
+
+  const tagStyle=`background:${C[d.type]}22;color:${C[d.type]};border:1px solid ${C[d.type]}44;`;
+  const mechStyle=`background:${d.mechColor}22;color:${d.mechColor};border:1px solid ${d.mechColor}44;`;
+  const exHtml=d.examples.map(ex=>`<div class="d-ex-i">▸ ${ex}</div>`).join("");
+
+  content.innerHTML=`
+    <div class="d-tag" style="${tagStyle}">${d.sub}</div>
+    <div class="d-zh" style="color:${C[d.type]}">${d.label}</div>
+    <div class="d-py">${d.pinyin}</div>
+    <div class="d-def">${d.def}</div>
+    <div class="d-ex">
+      <div class="d-ex-t">典型用例</div>
+      ${exHtml}
+    </div>
+    <span class="d-mech" style="${mechStyle}">⚙ ${d.mechanism}</span>
+    ${relBadges?`<div class="d-rels"><div style="margin-bottom:4px;font-size:10px;color:#6e7681">关联义项</div>${relBadges}</div>`:""}
+  `;
+  panel.classList.add("show");
+}
+
+svg.on("click",()=>document.getElementById("detail").classList.remove("show"));
+
+// 控制
+let paused=false;
+function toggleSim(){ paused=!paused; paused?sim.stop():sim.restart(); }
+function resetView(){
+  svg.transition().duration(600).call(zoom.transform,
+    d3.zoomIdentity.translate(0,0).scale(1));
+}
+</script>
+</body>
+</html>
