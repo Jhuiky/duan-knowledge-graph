@@ -247,6 +247,10 @@
   .tag-metaphor  { background: #fff3e0; color: #bf360c; border: 1px solid #ff8a65; font-weight: 700; }
   .tag-metonymy  { background: #e8f4fd; color: #01579b; border: 1px solid #64b5f6; font-weight: 700; }
   .tag-radiation { background: #f9f0ff; color: #6a0080; border: 1px solid #ba68c8; font-weight: 700; }
+  /* 文化关联标签 */
+  .tag-culture  { background: #fff8e1; color: #e65100; border: 1px solid #ffb74d; font-weight: 700; }
+  .tag-idiom    { background: #fce4ec; color: #880e4f; border: 1px solid #f48fb1; font-weight: 700; }
+  .tag-philosophy { background: #e0f2f1; color: #004d40; border: 1px solid #80cbc4; font-weight: 700; }
 
   /* ===== 字形演变 ===== */
   .evolution-track {
@@ -388,7 +392,7 @@
 
   #graph-svg {
     width: 100%;
-    height: 640px;
+    height: 800px;
     display: block;
   }
 
@@ -884,8 +888,83 @@
       <tr><td class="entity-a">义①→义③</td><td class="relation-type" style="color:#01579b;font-weight:600;">转喻</td><td class="entity-b">量度邻近，空间量度→数量亏欠（PART FOR WHOLE）</td><td>认知语义</td></tr>
       <tr><td class="entity-a">义①→义④</td><td class="relation-type" style="color:#bf360c;font-weight:600;">实体隐喻</td><td class="entity-b">ABILITY IS LENGTH，物理→能力/品格，伴随贬义化</td><td>认知语义</td></tr>
       <tr><td class="entity-a">义②→义⑤</td><td class="relation-type" style="color:#6a0080;font-weight:600;">语义辐射</td><td class="entity-b">伴随属性"紧张感"凸显独立，属性强化引申</td><td>认知语义</td></tr>
+      <tr style="background:rgba(212,160,23,0.08);"><td class="entity-a" style="color:#e65100;">取长补短</td><td class="relation-type" style="color:#e65100;font-weight:600;">文化典故</td><td class="entity-b" style="color:#e65100;">《孟子》，义④→中庸互补思想</td><td>文化关联</td></tr>
+      <tr style="background:rgba(212,160,23,0.04);"><td class="entity-a" style="color:#e65100;">三长两短</td><td class="relation-type" style="color:#e65100;font-weight:600;">民俗延伸</td><td class="entity-b" style="color:#e65100;">棺木五板制，义③'缺少'的民俗引申</td><td>文化关联</td></tr>
+      <tr style="background:rgba(212,160,23,0.08);"><td class="entity-a" style="color:#e65100;">说长道短</td><td class="relation-type" style="color:#e65100;font-weight:600;">社会语用</td><td class="entity-b" style="color:#e65100;">长短对举价值评判，义④的语用实现</td><td>文化关联</td></tr>
+      <tr style="background:rgba(212,160,23,0.04);"><td class="entity-a" style="color:#e65100;">度量衡文化</td><td class="relation-type" style="color:#e65100;font-weight:600;">度量基准</td><td class="entity-b" style="color:#e65100;">义①'短'的古代度量语境（尺、寸、仞）</td><td>文化关联</td></tr>
+      <tr style="background:rgba(212,160,23,0.08);"><td class="entity-a" style="color:#e65100;">兵法文化</td><td class="relation-type" style="color:#e65100;font-weight:600;">军事语用</td><td class="entity-b" style="color:#e65100;">短兵相接，义⑤'急促紧迫'的军事延伸</td><td>文化关联</td></tr>
+      <tr style="background:rgba(212,160,23,0.04);"><td class="entity-a" style="color:#e65100;">短褐穿结</td><td class="relation-type" style="color:#e65100;font-weight:600;">服饰文化</td><td class="entity-b" style="color:#e65100;">陶渊明《五柳先生传》，义①古代服饰语用</td><td>文化关联</td></tr>
+      <tr style="background:rgba(212,160,23,0.08);"><td class="entity-a" style="color:#e65100;">中庸之道</td><td class="relation-type" style="color:#e65100;font-weight:600;">哲学思想</td><td class="entity-b" style="color:#e65100;">长短相济，儒家核心辩证思维</td><td>文化关联</td></tr>
+      <tr style="background:rgba(212,160,23,0.04);"><td class="entity-a" style="color:#e65100;">物极必反</td><td class="relation-type" style="color:#e65100;font-weight:600;">辩证哲学</td><td class="entity-b" style="color:#e65100;">道家长短互转思维，'短之极则为长'</td><td>文化关联</td></tr>
     </tbody>
   </table>
+
+  <!-- §4.5 文化关联专项 -->
+  <div class="section-title">
+    <span class="section-icon">文</span>文化关联分析<span class="section-icon">化</span>
+  </div>
+
+  <div style="background:rgba(253,246,227,0.95);border:1px solid var(--border);border-radius:4px;padding:24px;box-shadow:2px 2px 8px rgba(0,0,0,0.07);margin-bottom:8px;">
+
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
+      <thead>
+        <tr style="background:#d4a017;color:white;">
+          <th style="padding:8px 12px;text-align:left;">文化载体</th>
+          <th style="padding:8px 12px;text-align:left;">关联义项</th>
+          <th style="padding:8px 12px;text-align:left;">文化内涵</th>
+          <th style="padding:8px 12px;text-align:left;">出典/来源</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:rgba(253,246,227,0.8);">
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);font-weight:700;color:#e65100;">取长补短</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">义④ 缺点短处</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">汲取他人长处以弥补自身不足，体现中庸互补、自我完善的儒家修养论</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--muted);">《孟子·滕文公上》</td>
+        </tr>
+        <tr style="background:rgba(240,230,200,0.3);">
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);font-weight:700;color:#e65100;">三长两短</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">义③ 数量缺少</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">棺木由三长两短五块木板制成，喻指意外灾祸或死亡，义③'缺少'的民俗隐喻化</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--muted);">民间丧葬习俗</td>
+        </tr>
+        <tr style="background:rgba(253,246,227,0.8);">
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);font-weight:700;color:#e65100;">说长道短</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">义④ 缺点短处</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">'长''短'对举反映古代价值评判传统，议论他人是非，体现'长''短'对称的文化心理</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--muted);">唐代俗语 / 口语传统</td>
+        </tr>
+        <tr style="background:rgba(240,230,200,0.3);">
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);font-weight:700;color:#e65100;">短兵相接</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">义⑤ 急促紧迫</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">'短兵'指刀剑等近距离武器，'相接'突出紧迫激烈，义⑤的军事语境延伸</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--muted);">《楚辞·九歌》</td>
+        </tr>
+        <tr style="background:rgba(253,246,227,0.8);">
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);font-weight:700;color:#e65100;">短褐穿结</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">义① 长度短小</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">'短褐'即粗布短衣，反映义①本义在古代服饰等级文化中的语用——短衣为平民服饰</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--muted);">陶渊明《五柳先生传》</td>
+        </tr>
+        <tr style="background:rgba(240,230,200,0.3);">
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);font-weight:700;color:#e65100;">度量衡文化</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">义① 长度短小</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">古代'短'以'尺''寸'为基准，度量衡制度塑造了'长短'的精确文化语义</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--muted);">《汉书·律历志》</td>
+        </tr>
+        <tr style="background:rgba(253,246,227,0.8);">
+          <td style="padding:8px 12px;font-weight:700;color:#e65100;">中庸之道 / 物极必反</td>
+          <td style="padding:8px 12px;">义①④ 全部义项</td>
+          <td style="padding:8px 12px;">'长''短'互为对立又可转化，体现儒家中庸互补与道家物极必反的辩证哲学传统</td>
+          <td style="padding:8px 12px;color:var(--muted);">《论语》《老子》</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:12px;padding:10px 14px;background:rgba(212,160,23,0.08);border-radius:4px;border-left:3px solid #d4a017;font-size:12px;color:var(--muted);line-height:1.8;">
+      <strong style="color:var(--ink);">文化语义规律：</strong>「短」在中华文化中具有深厚的文化负载意义。从<strong>度量衡制度</strong>中的物理基准，到<strong>丧葬民俗</strong>（三长两短）、<strong>服饰等级</strong>（短褐穿结）、<strong>兵法术语</strong>（短兵相接），再到<strong>儒家修养论</strong>（取长补短、自知之明）与<strong>道家辩证哲学</strong>（物极必反、长短相济），「短」的文化语义覆盖了物质制度、民俗信仰、军事思想、伦理修养与哲学思辨等多个文化维度。
+    </div>
+  </div>
 
   <!-- §5 知识图谱可视化 -->
   <div class="section-title">
@@ -907,6 +986,11 @@
       <div class="legend-item"><div class="legend-dot" style="background:#7a5c8a;border-color:#5a3c6a;"></div>语用节点</div>
       <div class="legend-item"><div class="legend-dot" style="background:#8b4513;border-color:#5a2a00;"></div>义项节点</div>
       <div class="legend-item"><div class="legend-dot" style="background:#c0702b;border-color:#8b4200;"></div>认知机制节点</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#d4a017;border-color:#a07800;"></div>文化关联节点</div>
+      <div class="legend-item" style="gap:2px;"><svg width="24" height="8"><line x1="0" y1="4" x2="24" y2="4" stroke="#bf360c" stroke-width="2" stroke-dasharray="6,3"/></svg><span style="color:var(--muted);">隐喻关系</span></div>
+      <div class="legend-item" style="gap:2px;"><svg width="24" height="8"><line x1="0" y1="4" x2="24" y2="4" stroke="#01579b" stroke-width="2" stroke-dasharray="4,3"/></svg><span style="color:var(--muted);">转喻关系</span></div>
+      <div class="legend-item" style="gap:2px;"><svg width="24" height="8"><line x1="0" y1="4" x2="24" y2="4" stroke="#6a0080" stroke-width="2" stroke-dasharray="2,3"/></svg><span style="color:var(--muted);">语义辐射</span></div>
+      <div class="legend-item" style="gap:2px;"><svg width="24" height="8"><line x1="0" y1="4" x2="24" y2="4" stroke="#d4a017" stroke-width="2" stroke-dasharray="8,4"/></svg><span style="color:var(--muted);">文化关联</span></div>
     </div>
   </div>
 
@@ -966,6 +1050,17 @@ const nodes = [
   { id: 30, label: "转喻",     group: "cogmech", desc: "量度邻近触发，空间量→数量亏欠，义①→义③，PART FOR WHOLE" },
   { id: 31, label: "实体隐喻", group: "cogmech", desc: "ABILITY IS LENGTH：物理长度映射能力/品格，义①→义④，伴随贬义化" },
   { id: 32, label: "语义辐射", group: "cogmech", desc: "义②伴随属性'紧张感'被独立凸显，形成义⑤，非跨域，属性强化引申" },
+  // 文化关联节点
+  { id: 33, label: "取长补短", group: "culture", desc: "文化典故：语出《孟子·滕文公上》，汲取他人长处弥补自身不足，体现中庸互补思想" },
+  { id: 34, label: "三长两短", group: "culture", desc: "文化典故：指意外灾祸/死亡。源于棺木由三长两短五块木板制成，义③'缺少'的民俗延伸" },
+  { id: 35, label: "说长道短", group: "culture", desc: "文化典故：议论是非好坏。义④'缺点'的社会语用，'长''短'对举反映价值评判传统" },
+  { id: 36, label: "中庸之道", group: "culture", desc: "文化概念：儒家核心理念，不偏不倚。'长短'对举蕴含中庸互补的哲学思维——长短相济" },
+  { id: 37, label: "度量衡文化", group: "culture", desc: "文化背景：古代度量衡制度中'短'的基准，与'尺''寸''仞'等度量单位相关" },
+  { id: 38, label: "兵法文化", group: "culture", desc: "文化概念：'短兵相接'源自兵法，指近距离白刃战，义⑤'急促紧迫'的军事语用延伸" },
+  { id: 39, label: "短褐穿结", group: "culture", desc: "文化典故：语出陶渊明《五柳先生传》，粗布短衣，反映义①本义在古代服饰文化中的语用" },
+  { id: 40, label: "辞长就短", group: "culture", desc: "文化典故：舍弃长处而就短处，反用'取长补短'之意，见于古典文学批评" },
+  { id: 41, label: "人贵有自知之明", group: "culture", desc: "文化概念：义④'缺点/短处'的认知前提——认知自身'短'，是传统文化中的修养要求" },
+  { id: 42, label: "物极必反", group: "culture", desc: "文化概念：道家辩证思维，'长''短'互转。短之极则为长，体现中国传统辩证哲学" },
 ];
 
 const links = [
@@ -1015,7 +1110,7 @@ const links = [
   { source: 11, target: 28, label: "引申起点" },
   { source: 12, target: 28, label: "引申中间" },
   { source: 14, target: 28, label: "引申终点" },
-  // 认知机制
+  // 认知机制（义项→认知机制节点）
   { source: 11, target: 29, label: "触发机制" },
   { source: 12, target: 29, label: "结果义项" },
   { source: 11, target: 30, label: "触发机制" },
@@ -1024,6 +1119,23 @@ const links = [
   { source: 14, target: 31, label: "结果义项" },
   { source: 12, target: 32, label: "触发机制" },
   { source: 15, target: 32, label: "结果义项" },
+  // 认知语义关系直连边（义项→义项）
+  { source: 11, target: 12, label: "结构隐喻", cogrel: "metaphor" },
+  { source: 11, target: 13, label: "转喻",     cogrel: "metonymy" },
+  { source: 11, target: 14, label: "实体隐喻", cogrel: "metaphor" },
+  { source: 12, target: 15, label: "语义辐射", cogrel: "radiation" },
+  // 文化关联边
+  { source: 14, target: 33, label: "文化典故", culture: true },
+  { source: 33, target: 36, label: "文化意蕴", culture: true },
+  { source: 13, target: 34, label: "民俗延伸", culture: true },
+  { source: 14, target: 35, label: "社会语用", culture: true },
+  { source: 11, target: 37, label: "度量基准", culture: true },
+  { source: 15, target: 38, label: "军事语用", culture: true },
+  { source: 11, target: 39, label: "服饰文化", culture: true },
+  { source: 14, target: 40, label: "文学批评", culture: true },
+  { source: 14, target: 41, label: "修养传统", culture: true },
+  { source: 11, target: 42, label: "辩证哲学", culture: true },
+  { source: 42, target: 20, label: "长短互转", culture: true },
 ];
 
 // =====================================================
@@ -1036,7 +1148,8 @@ const colorMap = {
   meaning:   "#8b4513",
   vocab:     "#b8860b",
   pragmatic: "#7a5c8a",
-  cogmech:   "#c0702b",  // 认知机制：橙褐色
+  cogmech:   "#c0702b",
+  culture:   "#d4a017",
 };
 
 const strokeMap = {
@@ -1046,13 +1159,17 @@ const strokeMap = {
   meaning:   "#5a2a00",
   vocab:     "#8b6600",
   pragmatic: "#5a3c6a",
-  cogmech:   "#8b4200",  // 认知机制描边
+  cogmech:   "#8b4200",
+  culture:   "#a07800",
 };
+
+const cogrelColors = { metaphor: "#bf360c", metonymy: "#01579b", radiation: "#6a0080" };
+const cogrelDash  = { metaphor: "8,4", metonymy: "5,3", radiation: "3,3" };
 
 const svg = d3.select("#graph-svg");
 const container = document.getElementById("graph-container");
 let width = container.clientWidth;
-let height = 640;
+let height = 800;
 
 const svgEl = document.getElementById("graph-svg");
 svgEl.setAttribute("viewBox", `0 0 ${width} ${height}`);
@@ -1077,29 +1194,77 @@ Object.entries(colorMap).forEach(([k, col]) => {
     .attr("fill", col).attr("opacity", 0.7);
 });
 
+// 认知语义关系箭头
+Object.entries(cogrelColors).forEach(([k, col]) => {
+  defs.append("marker")
+    .attr("id", `arrow-cog-${k}`)
+    .attr("viewBox", "0 -4 8 8")
+    .attr("refX", 22).attr("refY", 0)
+    .attr("markerWidth", 7).attr("markerHeight", 7)
+    .attr("orient", "auto")
+    .append("path")
+    .attr("d", "M0,-4L8,0L0,4")
+    .attr("fill", col).attr("opacity", 0.85);
+});
+
+// 文化关联箭头
+defs.append("marker")
+  .attr("id", "arrow-culture")
+  .attr("viewBox", "0 -4 8 8")
+  .attr("refX", 22).attr("refY", 0)
+  .attr("markerWidth", 7).attr("markerHeight", 7)
+  .attr("orient", "auto")
+  .append("path")
+  .attr("d", "M0,-4L8,0L0,4")
+  .attr("fill", "#d4a017").attr("opacity", 0.75);
+
 // simulation
 const sim = d3.forceSimulation(nodes)
   .force("link", d3.forceLink(links).id(d => d.id).distance(d => {
+    if (d.cogrel) return 200;
+    if (d.culture) return 180;
     if (d.source.group === "core" || d.target.group === "core") return 120;
     return 80;
-  }).strength(0.4))
-  .force("charge", d3.forceManyBody().strength(-320))
+  }).strength(d => {
+    if (d.cogrel) return 0.6;
+    if (d.culture) return 0.35;
+    return 0.4;
+  }))
+  .force("charge", d3.forceManyBody().strength(-380))
   .force("center", d3.forceCenter(width / 2, height / 2))
-  .force("collision", d3.forceCollide(36));
+  .force("collision", d3.forceCollide(40));
 
 // links
 const link = g.append("g").attr("class", "links")
   .selectAll("line").data(links).join("line")
-  .attr("stroke", d => colorMap[nodes[d.source.id]?.group || d.source.group] || "#aaa")
-  .attr("stroke-width", 1.2)
-  .attr("stroke-opacity", 0.5)
-  .attr("marker-end", d => `url(#arrow-${nodes[d.source.id]?.group || d.source.group || "vocab"})`);
+  .attr("stroke", d => {
+    if (d.cogrel) return cogrelColors[d.cogrel];
+    if (d.culture) return "#d4a017";
+    return colorMap[nodes[d.source.id]?.group || d.source.group] || "#aaa";
+  })
+  .attr("stroke-width", d => d.cogrel ? 2.2 : (d.culture ? 1.8 : 1.2))
+  .attr("stroke-opacity", d => d.cogrel ? 0.75 : (d.culture ? 0.6 : 0.5))
+  .attr("stroke-dasharray", d => {
+    if (d.cogrel) return cogrelDash[d.cogrel];
+    if (d.culture) return "8,4";
+    return "none";
+  })
+  .attr("marker-end", d => {
+    if (d.cogrel) return `url(#arrow-cog-${d.cogrel})`;
+    if (d.culture) return `url(#arrow-culture)`;
+    return `url(#arrow-${nodes[d.source.id]?.group || d.source.group || "vocab"})`;
+  });
 
 // link labels
 const linkLabel = g.append("g").attr("class", "link-labels")
   .selectAll("text").data(links).join("text")
-  .attr("font-size", 9)
-  .attr("fill", "#7a6a52")
+  .attr("font-size", d => d.cogrel ? 10 : (d.culture ? 9 : 8))
+  .attr("font-weight", d => d.cogrel ? "700" : (d.culture ? "600" : "400"))
+  .attr("fill", d => {
+    if (d.cogrel) return cogrelColors[d.cogrel];
+    if (d.culture) return "#a07800";
+    return "#7a6a52";
+  })
   .attr("text-anchor", "middle")
   .text(d => d.label);
 
@@ -1116,7 +1281,13 @@ const nodeG = g.append("g").attr("class", "nodes")
 const tooltip = document.getElementById("tooltip");
 
 nodeG.append("circle")
-  .attr("r", d => d.group === "core" ? 30 : (d.group === "meaning" ? 18 : 14))
+  .attr("r", d => {
+    if (d.group === "core") return 30;
+    if (d.group === "meaning") return 18;
+    if (d.group === "culture") return 16;
+    if (d.group === "cogmech") return 15;
+    return 14;
+  })
   .attr("fill", d => colorMap[d.group])
   .attr("stroke", d => strokeMap[d.group])
   .attr("stroke-width", d => d.group === "core" ? 3 : 1.5)
