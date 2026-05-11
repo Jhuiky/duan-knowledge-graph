@@ -252,59 +252,6 @@
   .tag-idiom    { background: #fce4ec; color: #880e4f; border: 1px solid #f48fb1; font-weight: 700; }
   .tag-philosophy { background: #e0f2f1; color: #004d40; border: 1px solid #80cbc4; font-weight: 700; }
 
-  /* ===== 字形演变 ===== */
-  .evolution-track {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    overflow-x: auto;
-    padding: 20px 0;
-    background: rgba(253,246,227,0.9);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.06);
-  }
-
-  .evol-item {
-    flex: 1;
-    min-width: 100px;
-    text-align: center;
-    padding: 12px 8px;
-    position: relative;
-  }
-
-  .evol-item:not(:last-child)::after {
-    content: '→';
-    position: absolute;
-    right: -10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--gold);
-    font-size: 18px;
-    z-index: 1;
-  }
-
-  .evol-char {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--ink);
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  .evol-label {
-    font-size: 11px;
-    color: var(--muted);
-    display: block;
-  }
-
-  .evol-desc {
-    font-size: 10px;
-    color: var(--border);
-    display: block;
-    margin-top: 2px;
-  }
-
   /* ===== 义项列表 ===== */
   .meaning-list {
     display: flex;
@@ -563,44 +510,6 @@
       <div class="data-row"><span class="data-label">本义</span><span class="data-value">长度小于标准</span></div>
       <div class="data-row"><span class="data-label">出典</span><span class="data-value">《说文》："短，有所长短"</span></div>
       <div class="data-row"><span class="data-label">古音（中古）</span><span class="data-value">端母·桓韵·上声</span></div>
-    </div>
-  </div>
-
-  <!-- 字形演变 -->
-  <div class="section-title">
-    <span class="section-icon">变</span>字形历史演变<span class="section-icon">史</span>
-  </div>
-
-  <div class="evolution-track">
-    <div class="evol-item">
-      <span class="evol-char" style="font-family:serif;font-size:28px;">𠂉</span>
-      <span class="evol-label">甲骨文</span>
-      <span class="evol-desc">矢形初文</span>
-    </div>
-    <div class="evol-item">
-      <span class="evol-char" style="font-family:serif;">短</span>
-      <span class="evol-label">金文</span>
-      <span class="evol-desc">矢豆组合</span>
-    </div>
-    <div class="evol-item">
-      <span class="evol-char">短</span>
-      <span class="evol-label">小篆</span>
-      <span class="evol-desc">线条规整</span>
-    </div>
-    <div class="evol-item">
-      <span class="evol-char" style="font-family:'KaiTi',serif;">短</span>
-      <span class="evol-label">隶书</span>
-      <span class="evol-desc">波磔出现</span>
-    </div>
-    <div class="evol-item">
-      <span class="evol-char" style="font-family:'STKaiti','KaiTi',serif;">短</span>
-      <span class="evol-label">楷书</span>
-      <span class="evol-desc">方正成熟</span>
-    </div>
-    <div class="evol-item">
-      <span class="evol-char" style="font-family:sans-serif;">短</span>
-      <span class="evol-label">现代简体</span>
-      <span class="evol-desc">沿用楷书</span>
     </div>
   </div>
 
