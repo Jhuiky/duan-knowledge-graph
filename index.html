@@ -242,6 +242,11 @@
   .tag-negative { background: #fbe9e7; color: #bf360c; border: 1px solid #ffab91; }
   .tag-oral { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
   .tag-written { background: #e8eaf6; color: #283593; border: 1px solid #9fa8da; }
+  /* 认知机制标签 */
+  .tag-base    { background: #f0faf0; color: #1b5e20; border: 1px solid #66bb6a; font-weight: 700; }
+  .tag-metaphor  { background: #fff3e0; color: #bf360c; border: 1px solid #ff8a65; font-weight: 700; }
+  .tag-metonymy  { background: #e8f4fd; color: #01579b; border: 1px solid #64b5f6; font-weight: 700; }
+  .tag-radiation { background: #f9f0ff; color: #6a0080; border: 1px solid #ba68c8; font-weight: 700; }
 
   /* ===== 字形演变 ===== */
   .evolution-track {
@@ -612,6 +617,7 @@
           <span class="tag tag-hsk2">HSK 2级</span>
           <span class="tag tag-neutral">中性</span>
           <span class="tag tag-oral">口语体</span>
+          <span class="tag tag-base">🏠 本义·基础义</span>
         </div>
       </div>
     </div>
@@ -626,6 +632,10 @@
           <span class="tag tag-hsk3">HSK 3级</span>
           <span class="tag tag-neutral">中性</span>
           <span class="tag tag-oral">口书兼用</span>
+          <span class="tag tag-metaphor">🔀 结构隐喻：时间是空间</span>
+        </div>
+        <div style="margin-top:8px;font-size:11px;color:#8b4513;background:rgba(139,69,19,0.07);padding:5px 8px;border-radius:2px;border-left:2px solid #b8860b;">
+          义①→义②：以空间长度域映射时间域（TIME IS SPACE），"长短"概念横移至时间轴，属于跨域结构隐喻。
         </div>
       </div>
     </div>
@@ -640,6 +650,10 @@
           <span class="tag tag-hsk4">HSK 4级</span>
           <span class="tag tag-neutral">中性偏贬</span>
           <span class="tag tag-oral">口语体</span>
+          <span class="tag tag-metonymy">🔗 转喻：空间量→数量域</span>
+        </div>
+        <div style="margin-top:8px;font-size:11px;color:#01579b;background:rgba(1,87,155,0.06);padding:5px 8px;border-radius:2px;border-left:2px solid #64b5f6;">
+          义①→义③：空间"短"（物理量度不足）转喻至数量/数值不足，二者共享"量度亏欠"的邻近特征，属于同一概念域内的转喻投射（PART FOR WHOLE）。
         </div>
       </div>
     </div>
@@ -654,6 +668,10 @@
           <span class="tag tag-hsk4">HSK 4级</span>
           <span class="tag tag-negative">贬义色彩</span>
           <span class="tag tag-written">书面语</span>
+          <span class="tag tag-metaphor">🔀 概念隐喻：能力是长度</span>
+        </div>
+        <div style="margin-top:8px;font-size:11px;color:#bf360c;background:rgba(191,54,12,0.06);padding:5px 8px;border-radius:2px;border-left:2px solid #ff8a65;">
+          义①→义④：以具体的物理长度映射抽象的道德/能力维度（ABILITY IS LENGTH），"短"喻指能力或品格的不足，属于实体隐喻（ontological metaphor），同时伴随由具体→抽象的语义漂移与贬义化。
         </div>
       </div>
     </div>
@@ -661,17 +679,126 @@
     <div class="meaning-item">
       <div class="meaning-num">⑤</div>
       <div class="meaning-content">
-        <div class="meaning-def">【副词义】突然间（"短促"引申，多见于书面）</div>
-        <div class="meaning-meta">词性：副词/形容词 &nbsp;|&nbsp; 搭配：短促、短兵相接</div>
+        <div class="meaning-def">【形容词义】急促、时间紧迫（书面文言）</div>
+        <div class="meaning-meta">词性：形容词 &nbsp;|&nbsp; 搭配：短促、短兵相接</div>
         <div class="meaning-example">例句：号声短促，战鼓擂响。</div>
         <div class="meaning-tags">
           <span class="tag tag-hsk5">HSK 5级</span>
           <span class="tag tag-neutral">中性</span>
           <span class="tag tag-written">书面文言</span>
+          <span class="tag tag-radiation">🌀 语义辐射：属性强化</span>
+        </div>
+        <div style="margin-top:8px;font-size:11px;color:#6a0080;background:rgba(106,0,128,0.05);padding:5px 8px;border-radius:2px;border-left:2px solid #ba68c8;">
+          义②→义⑤：在时间短暂义（义②）基础上，强化"紧迫感"这一伴随属性，凸显焦虑/急促的主观感受，属于义项辐射引申，语义由客观描述转向主观感受。
         </div>
       </div>
     </div>
 
+  </div>
+
+  <!-- §2.5 语义演变机制专项分析 -->
+  <div class="section-title">
+    <span class="section-icon">认</span>义项认知语义演变机制<span class="section-icon">知</span>
+  </div>
+
+  <div style="background:rgba(253,246,227,0.95);border:1px solid var(--border);border-radius:4px;padding:24px;box-shadow:2px 2px 8px rgba(0,0,0,0.07);margin-bottom:8px;">
+
+    <!-- 演变路径图示 -->
+    <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;margin-bottom:24px;padding:16px;background:rgba(240,230,200,0.4);border-radius:4px;border:1px dashed var(--border);">
+      <div style="text-align:center;padding:10px 14px;background:rgba(192,57,43,0.12);border:2px solid var(--vermilion);border-radius:4px;min-width:90px;">
+        <div style="font-size:16px;font-weight:700;color:var(--vermilion);">①本义</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">空间长度小</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 8px;">
+        <span style="font-size:10px;color:#bf360c;white-space:nowrap;">🔀 结构隐喻</span>
+        <span style="font-size:18px;color:var(--gold);">→</span>
+        <span style="font-size:10px;color:#bf360c;white-space:nowrap;">TIME IS SPACE</span>
+      </div>
+      <div style="text-align:center;padding:10px 14px;background:rgba(184,134,11,0.1);border:2px solid var(--gold);border-radius:4px;min-width:90px;">
+        <div style="font-size:16px;font-weight:700;color:var(--gold);">②引申</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">时间短暂</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 8px;">
+        <span style="font-size:10px;color:#6a0080;white-space:nowrap;">🌀 属性辐射</span>
+        <span style="font-size:18px;color:var(--gold);">→</span>
+        <span style="font-size:10px;color:#6a0080;white-space:nowrap;">感受强化</span>
+      </div>
+      <div style="text-align:center;padding:10px 14px;background:rgba(106,0,128,0.08);border:2px solid #ba68c8;border-radius:4px;min-width:90px;">
+        <div style="font-size:16px;font-weight:700;color:#6a0080;">⑤辐射</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">急促紧迫</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;justify-content:center;flex-wrap:wrap;gap:0;margin-bottom:16px;">
+      <div style="text-align:center;padding:10px 14px;background:rgba(192,57,43,0.12);border:2px solid var(--vermilion);border-radius:4px;min-width:90px;">
+        <div style="font-size:16px;font-weight:700;color:var(--vermilion);">①本义</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">空间长度小</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 8px;margin-top:12px;">
+        <span style="font-size:10px;color:#01579b;white-space:nowrap;">🔗 转喻</span>
+        <span style="font-size:18px;color:var(--gold);">→</span>
+        <span style="font-size:10px;color:#01579b;white-space:nowrap;">量度邻近</span>
+      </div>
+      <div style="text-align:center;padding:10px 14px;background:rgba(1,87,155,0.08);border:2px solid #64b5f6;border-radius:4px;min-width:90px;">
+        <div style="font-size:16px;font-weight:700;color:#01579b;">③转喻</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">数量缺少</div>
+      </div>
+      <div style="width:30px;"></div>
+      <div style="text-align:center;padding:10px 14px;background:rgba(192,57,43,0.12);border:2px solid var(--vermilion);border-radius:4px;min-width:90px;">
+        <div style="font-size:16px;font-weight:700;color:var(--vermilion);">①本义</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">空间长度小</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 8px;margin-top:12px;">
+        <span style="font-size:10px;color:#bf360c;white-space:nowrap;">🔀 实体隐喻</span>
+        <span style="font-size:18px;color:var(--gold);">→</span>
+        <span style="font-size:10px;color:#bf360c;white-space:nowrap;">ABILITY=LENGTH</span>
+      </div>
+      <div style="text-align:center;padding:10px 14px;background:rgba(191,54,12,0.08);border:2px solid #ff8a65;border-radius:4px;min-width:90px;">
+        <div style="font-size:16px;font-weight:700;color:#bf360c;">④隐喻</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">缺点短处</div>
+      </div>
+    </div>
+
+    <!-- 机制说明表 -->
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;">
+      <thead>
+        <tr style="background:var(--vermilion);color:white;">
+          <th style="padding:8px 12px;text-align:left;">义项关系</th>
+          <th style="padding:8px 12px;text-align:left;">演变机制</th>
+          <th style="padding:8px 12px;text-align:left;">认知类型</th>
+          <th style="padding:8px 12px;text-align:left;">理论依据</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:rgba(253,246,227,0.8);">
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);font-weight:700;color:var(--vermilion);">义①→义②</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">空间长度 → 时间长度</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);"><span class="tag tag-metaphor">结构隐喻</span></td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--muted);">Lakoff & Johnson，TIME IS SPACE，跨域映射，源域（空间）→靶域（时间）</td>
+        </tr>
+        <tr style="background:rgba(240,230,200,0.3);">
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);font-weight:700;color:var(--vermilion);">义①→义③</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">空间量度不足 → 数量亏欠</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);"><span class="tag tag-metonymy">转喻</span></td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--muted);">同一认知框架内，"长度短"作为量度的典型代表，转喻至数量不足；邻近关系触发（PART FOR WHOLE）</td>
+        </tr>
+        <tr style="background:rgba(253,246,227,0.8);">
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);font-weight:700;color:var(--vermilion);">义①→义④</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);">物理长度 → 能力/品格</td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);"><span class="tag tag-metaphor">实体隐喻</span></td>
+          <td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--muted);">ABILITY IS LENGTH，以具体物理特征投射于抽象能力/道德维度，伴随语义贬降（pejoration）</td>
+        </tr>
+        <tr style="background:rgba(240,230,200,0.3);">
+          <td style="padding:8px 12px;font-weight:700;color:var(--vermilion);">义②→义⑤</td>
+          <td style="padding:8px 12px;">时间短暂 → 急促/紧迫</td>
+          <td style="padding:8px 12px;"><span class="tag tag-radiation">语义辐射</span></td>
+          <td style="padding:8px 12px;color:var(--muted);">义②的伴随属性"紧张感"被凸显（profiling）并独立，形成新义位；属于义项辐射引申，非跨域映射</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:16px;padding:10px 14px;background:rgba(184,134,11,0.08);border-radius:4px;border-left:3px solid var(--gold);font-size:12px;color:var(--muted);line-height:1.8;">
+      <strong style="color:var(--ink);">综合规律：</strong>「短」的语义演变整体遵循"具体→抽象"的认知方向（Traugott 语义演变单向性原则），从原型空间义出发，通过<strong>结构隐喻</strong>（空间→时间）、<strong>转喻</strong>（量度→数量）、<strong>实体隐喻</strong>（物理→能力/道德）三条路径向外辐射，形成一词多义的语义网络（polysemy network）。
+    </div>
   </div>
 
   <!-- §3 语用属性 -->
@@ -753,6 +880,10 @@
       <tr><td class="entity-a">短</td><td class="relation-type">构成合成词</td><td class="entity-b">短暂、短期、短缺</td><td>词汇</td></tr>
       <tr><td class="entity-a">短</td><td class="relation-type">义项引申路径</td><td class="entity-b">空间→时间→程度→价值</td><td>语义演变</td></tr>
       <tr><td class="entity-a">短</td><td class="relation-type">属于词汇场</td><td class="entity-b">空间维度词场</td><td>语义场</td></tr>
+      <tr><td class="entity-a">义①→义②</td><td class="relation-type" style="color:#bf360c;font-weight:600;">结构隐喻</td><td class="entity-b">TIME IS SPACE，空间→时间跨域映射</td><td>认知语义</td></tr>
+      <tr><td class="entity-a">义①→义③</td><td class="relation-type" style="color:#01579b;font-weight:600;">转喻</td><td class="entity-b">量度邻近，空间量度→数量亏欠（PART FOR WHOLE）</td><td>认知语义</td></tr>
+      <tr><td class="entity-a">义①→义④</td><td class="relation-type" style="color:#bf360c;font-weight:600;">实体隐喻</td><td class="entity-b">ABILITY IS LENGTH，物理→能力/品格，伴随贬义化</td><td>认知语义</td></tr>
+      <tr><td class="entity-a">义②→义⑤</td><td class="relation-type" style="color:#6a0080;font-weight:600;">语义辐射</td><td class="entity-b">伴随属性"紧张感"凸显独立，属性强化引申</td><td>认知语义</td></tr>
     </tbody>
   </table>
 
@@ -775,6 +906,7 @@
       <div class="legend-item"><div class="legend-dot" style="background:#b8860b;border-color:#8b6600;"></div>词汇/HSK节点</div>
       <div class="legend-item"><div class="legend-dot" style="background:#7a5c8a;border-color:#5a3c6a;"></div>语用节点</div>
       <div class="legend-item"><div class="legend-dot" style="background:#8b4513;border-color:#5a2a00;"></div>义项节点</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#c0702b;border-color:#8b4200;"></div>认知机制节点</div>
     </div>
   </div>
 
@@ -827,8 +959,13 @@ const nodes = [
   { id: 25, label: "贬义色彩",  group: "pragmatic", desc: "义项④，负面价值评价" },
   { id: 26, label: "口语体",    group: "pragmatic", desc: "义项①②③，日常使用" },
   { id: 27, label: "书面语体",  group: "pragmatic", desc: "义项④⑤，正式文体" },
-  // 义项引申路径
-  { id: 28, label: "空间→时间→价值", group: "pragmatic", desc: "语义引申演变路径" },
+  // 义项引申路径（总）
+  { id: 28, label: "空间→时间→价值", group: "pragmatic", desc: "语义引申演变路径（总）" },
+  // 认知机制节点
+  { id: 29, label: "结构隐喻", group: "cogmech", desc: "TIME IS SPACE：时间是空间，跨域映射，义①→义②" },
+  { id: 30, label: "转喻",     group: "cogmech", desc: "量度邻近触发，空间量→数量亏欠，义①→义③，PART FOR WHOLE" },
+  { id: 31, label: "实体隐喻", group: "cogmech", desc: "ABILITY IS LENGTH：物理长度映射能力/品格，义①→义④，伴随贬义化" },
+  { id: 32, label: "语义辐射", group: "cogmech", desc: "义②伴随属性'紧张感'被独立凸显，形成义⑤，非跨域，属性强化引申" },
 ];
 
 const links = [
@@ -878,6 +1015,15 @@ const links = [
   { source: 11, target: 28, label: "引申起点" },
   { source: 12, target: 28, label: "引申中间" },
   { source: 14, target: 28, label: "引申终点" },
+  // 认知机制
+  { source: 11, target: 29, label: "触发机制" },
+  { source: 12, target: 29, label: "结果义项" },
+  { source: 11, target: 30, label: "触发机制" },
+  { source: 13, target: 30, label: "结果义项" },
+  { source: 11, target: 31, label: "触发机制" },
+  { source: 14, target: 31, label: "结果义项" },
+  { source: 12, target: 32, label: "触发机制" },
+  { source: 15, target: 32, label: "结果义项" },
 ];
 
 // =====================================================
@@ -890,6 +1036,7 @@ const colorMap = {
   meaning:   "#8b4513",
   vocab:     "#b8860b",
   pragmatic: "#7a5c8a",
+  cogmech:   "#c0702b",  // 认知机制：橙褐色
 };
 
 const strokeMap = {
@@ -899,6 +1046,7 @@ const strokeMap = {
   meaning:   "#5a2a00",
   vocab:     "#8b6600",
   pragmatic: "#5a3c6a",
+  cogmech:   "#8b4200",  // 认知机制描边
 };
 
 const svg = d3.select("#graph-svg");
